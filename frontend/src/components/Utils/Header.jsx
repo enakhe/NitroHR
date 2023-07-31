@@ -47,7 +47,7 @@ const Header = () => {
                         ))}
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <button className="rounded-md font-semibold text-white text-sm bg-primary px-3.5 py-2.5">
+                        <button className="rounded-md hover:bg-primary-hover font-semibold text-white text-sm bg-primary px-3.5 py-2.5">
                             <Link to='/request-demo'>
                                 Request a demo
                             </Link>

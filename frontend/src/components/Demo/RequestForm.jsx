@@ -1,5 +1,17 @@
 import { Fragment } from "react"
 
+const sizes = [
+    "less than 10",
+    "10 - 30",
+    "31 - 50",
+    "51 - 100",
+    "101 - 500",
+    "501 - 1,000",
+    "1,001 - 5,000",
+    "5,001 - 30",
+    "more than 10,000",
+]
+
 const RequestForm = () => {
     return (
         <Fragment>
@@ -22,11 +34,83 @@ const RequestForm = () => {
                             in. Explicabo id ut laborum.
                         </p>
                     </div>
-                    <div className="mx-auto mt-16 max-w-2xl rounded-md ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
-                        <div className="p-8 sm:p-10 lg:flex-auto">
-                            <input placeholder="First name" type="text" className="my-2 w-full rounded-md p-2  outline-none text-white text-sm" />
+                    <form>
+                        <div className="mx-auto mt-16 max-w-2xl rounded-md ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
+                            <div className="p-8 sm:p-10 lg:flex-auto">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                    <div>
+                                        <label className="block">
+                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                                                First name
+                                            </span>
+                                            <input type="text" name="firstName" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="First name" />
+                                        </label>
+
+                                        <label className="block mt-4">
+                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                                                Last name
+                                            </span>
+                                            <input type="text" name="lastName" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Last name" />
+                                        </label>
+
+                                        <label className="block mt-4">
+                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                                                Company name
+                                            </span>
+                                            <input type="text" name="companyName" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Company name" />
+                                        </label>
+                                    </div>
+
+                                    <div>
+                                        <label className="block">
+                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                                                Email
+                                            </span>
+                                            <input type="email" name="email" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
+                                        </label>
+
+                                        <label className="block mt-4">
+                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                                                Phone number
+                                            </span>
+                                            <input type="text" name="phoneNumber" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Phone number" />
+                                        </label>
+
+                                        <label htmlFor="companySize" className="block mt-4">
+                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                                                Company size
+                                            </span>
+                                            <select id="companySize" name="companySize" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1">
+                                                <option selected>Choose company size</option>
+                                                {
+                                                    sizes.map((size) => (
+                                                        <option key={size} value={size}>{size}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <label htmlFor="message" className="block mt-4">
+                                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
+                                        Message
+                                    </span>
+                                    <textarea id="message" name="message" rows="4" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Write your message here..."></textarea>
+                                </label>
+
+                                <div className="flex justify-center mt-4">
+                                    <button className="rounded-md hover:bg-gray-900 font-semibold text-white text-sm bg-secondary px-10 py-2.5">
+                                        Send
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
+
+                    </form>
                 </div>
             </div>
         </Fragment>
