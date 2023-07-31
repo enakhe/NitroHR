@@ -12,11 +12,11 @@ namespace backend.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Infinite-Pharma");
+                name: "Nitro-HR");
 
             migrationBuilder.CreateTable(
                 name: "Patients",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -29,8 +29,29 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Requests",
+                schema: "Nitro-HR",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CompanySize = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Affiliate = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Requests", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Role",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -45,7 +66,7 @@ namespace backend.Migrations
 
             migrationBuilder.CreateTable(
                 name: "User",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -74,7 +95,7 @@ namespace backend.Migrations
 
             migrationBuilder.CreateTable(
                 name: "RoleClaims",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -89,7 +110,7 @@ namespace backend.Migrations
                     table.ForeignKey(
                         name: "FK_RoleClaims_Role_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "Infinite-Pharma",
+                        principalSchema: "Nitro-HR",
                         principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -97,7 +118,7 @@ namespace backend.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserClaims",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -112,7 +133,7 @@ namespace backend.Migrations
                     table.ForeignKey(
                         name: "FK_UserClaims_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Infinite-Pharma",
+                        principalSchema: "Nitro-HR",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -120,7 +141,7 @@ namespace backend.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserLogins",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 columns: table => new
                 {
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -134,7 +155,7 @@ namespace backend.Migrations
                     table.ForeignKey(
                         name: "FK_UserLogins_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Infinite-Pharma",
+                        principalSchema: "Nitro-HR",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -142,7 +163,7 @@ namespace backend.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserRoles",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -154,14 +175,14 @@ namespace backend.Migrations
                     table.ForeignKey(
                         name: "FK_UserRoles_Role_RoleId",
                         column: x => x.RoleId,
-                        principalSchema: "Infinite-Pharma",
+                        principalSchema: "Nitro-HR",
                         principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserRoles_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Infinite-Pharma",
+                        principalSchema: "Nitro-HR",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -169,7 +190,7 @@ namespace backend.Migrations
 
             migrationBuilder.CreateTable(
                 name: "UserTokens",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -183,7 +204,7 @@ namespace backend.Migrations
                     table.ForeignKey(
                         name: "FK_UserTokens_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "Infinite-Pharma",
+                        principalSchema: "Nitro-HR",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -191,7 +212,7 @@ namespace backend.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 table: "Role",
                 column: "NormalizedName",
                 unique: true,
@@ -199,19 +220,19 @@ namespace backend.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 table: "RoleClaims",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 table: "User",
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 table: "User",
                 column: "NormalizedUserName",
                 unique: true,
@@ -219,19 +240,19 @@ namespace backend.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 table: "UserClaims",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserLogins_UserId",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 table: "UserLogins",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
-                schema: "Infinite-Pharma",
+                schema: "Nitro-HR",
                 table: "UserRoles",
                 column: "RoleId");
         }
@@ -241,35 +262,39 @@ namespace backend.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Patients",
-                schema: "Infinite-Pharma");
+                schema: "Nitro-HR");
+
+            migrationBuilder.DropTable(
+                name: "Requests",
+                schema: "Nitro-HR");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims",
-                schema: "Infinite-Pharma");
+                schema: "Nitro-HR");
 
             migrationBuilder.DropTable(
                 name: "UserClaims",
-                schema: "Infinite-Pharma");
+                schema: "Nitro-HR");
 
             migrationBuilder.DropTable(
                 name: "UserLogins",
-                schema: "Infinite-Pharma");
+                schema: "Nitro-HR");
 
             migrationBuilder.DropTable(
                 name: "UserRoles",
-                schema: "Infinite-Pharma");
+                schema: "Nitro-HR");
 
             migrationBuilder.DropTable(
                 name: "UserTokens",
-                schema: "Infinite-Pharma");
+                schema: "Nitro-HR");
 
             migrationBuilder.DropTable(
                 name: "Role",
-                schema: "Infinite-Pharma");
+                schema: "Nitro-HR");
 
             migrationBuilder.DropTable(
                 name: "User",
-                schema: "Infinite-Pharma");
+                schema: "Nitro-HR");
         }
     }
 }
