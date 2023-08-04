@@ -1,23 +1,85 @@
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { createRequest, reset } from '../../features/Demo/demoSlice';
+import { toast } from "react-toastify";
+import Spiner from '../Utils/Spiner';
+import { sizes } from "../../app/objects";
+import Input from "../Utils/Input";
+import Select from "../Utils/Select";
+import TextArea from "../Utils/TextArea";
 
-const sizes = [
-    "less than 10",
-    "10 - 30",
-    "31 - 50",
-    "51 - 100",
-    "101 - 500",
-    "501 - 1,000",
-    "1,001 - 5,000",
-    "5,001 - 30",
-    "more than 10,000",
-]
 
 const RequestForm = () => {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        companyName: '',
+        companySize: '',
+        message: '',
+    })
+
+    const [errors, setErrors] = useState({});
+    const { isError, isSuccess, detail, isLoading } = useSelector((state) => state.demo);
+    const { firstName, lastName, email, phoneNumber, companyName, companySize, message } = formData;
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (isError) {
+            toast.error(detail)
+        }
+
+        if (isSuccess) {
+            toast.success("Successfully saved request!. Thank you, we'll get in touch")
+            navigate('/')
+        }
+
+        dispatch(reset())
+    }, [isError, detail, navigate, isSuccess, dispatch]);
+
+    const onChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }));
+    };
+
+    const validate = () => {
+        let temp = {};
+        temp.email = (/\S+@\S+\.\S+/).test(email) ? false : true;
+        temp.firstName = firstName !== "" ? false : true;
+        temp.lastName = lastName !== "" ? false : true;
+        temp.phoneNumber = phoneNumber !== "" ? false : true;
+        temp.companyName = companyName !== "" ? false : true;
+        temp.companySize = companySize !== "" ? false : true;
+        temp.message = message !== "" ? false : true;
+        setErrors(temp);
+        return Object.values(temp).every(x => x === '');
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        validate()
+        const requestData = {
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            companyName,
+            companySize,
+            message,
+        }
+        dispatch(createRequest(requestData));
+    }
+
     return (
         <Fragment>
             <div className="relative isolate bg-white py-24 sm:py-32">
-                <div
-                    className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+                <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
                     aria-hidden="true">
                     <div
                         className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#0bbf64] to-[#c3f4db] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
@@ -34,82 +96,32 @@ const RequestForm = () => {
                             in. Explicabo id ut laborum.
                         </p>
                     </div>
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <div className="mx-auto mt-16 max-w-2xl rounded-md ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
                             <div className="p-8 sm:p-10 lg:flex-auto">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
+                                <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
                                     <div>
-                                        <label className="block">
-                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                                                First name
-                                            </span>
-                                            <input type="text" name="firstName" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="First name" />
-                                        </label>
-
-                                        <label className="block mt-4">
-                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                                                Last name
-                                            </span>
-                                            <input type="text" name="lastName" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Last name" />
-                                        </label>
-
-                                        <label className="block mt-4">
-                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                                                Company name
-                                            </span>
-                                            <input type="text" name="companyName" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Company name" />
-                                        </label>
+                                        <Input type="text" name="firstName" value={firstName} onChange={onChange} placeholder="First name" error={errors.firstName} />
+                                        <Input type="text" name="lastName" value={lastName} onChange={onChange} placeholder="Last name" error={errors.lastName} />
+                                        <Input type="text" name="companyName" value={companyName} onChange={onChange} placeholder="Company name" error={errors.companyName} />
                                     </div>
 
                                     <div>
-                                        <label className="block">
-                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                                                Email
-                                            </span>
-                                            <input type="email" name="email" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="you@example.com" />
-                                        </label>
-
-                                        <label className="block mt-4">
-                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                                                Phone number
-                                            </span>
-                                            <input type="text" name="phoneNumber" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Phone number" />
-                                        </label>
-
-                                        <label htmlFor="companySize" className="block mt-4">
-                                            <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                                                Company size
-                                            </span>
-                                            <select id="companySize" name="companySize" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1">
-                                                <option selected>Choose company size</option>
-                                                {
-                                                    sizes.map((size) => (
-                                                        <option key={size} value={size}>{size}</option>
-                                                    ))
-                                                }
-                                            </select>
-                                        </label>
+                                        <Input type="email" name="email" value={email} onChange={onChange} placeholder="Email" error={errors.email} />
+                                        <Input type="text" name="phoneNumber" value={phoneNumber} onChange={onChange} placeholder="Phone number" error={errors.phoneNumber} />
+                                        <Select name="companySize" onChange={onChange} list={sizes} placeholder="Company size" dummyText="Enter company size" error={errors.companySize} />
                                     </div>
-
                                 </div>
-
-                                <label htmlFor="message" className="block mt-4">
-                                    <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                                        Message
-                                    </span>
-                                    <textarea id="message" name="message" rows="4" className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-black focus:ring-black block w-full rounded-md sm:text-sm focus:ring-1" placeholder="Write your message here..."></textarea>
-                                </label>
-
-                                <div className="flex justify-center mt-4">
-                                    <button className="rounded-md hover:bg-gray-900 font-semibold text-white text-sm bg-secondary px-10 py-2.5">
-                                        Send
-                                    </button>
-                                </div>
+                                <TextArea name="message" onChange={onChange} value={message} error={errors.message} placeholder="Message" dummyText="Enter message here..." />
+                                {
+                                    isLoading ? <Spiner /> : (<div className="flex justify-center mt-4">
+                                        <button type="submit" className="rounded-md hover:bg-gray-900 font-semibold text-white text-sm bg-secondary px-10 py-2.5">
+                                            Send
+                                        </button>
+                                    </div>)
+                                }
                             </div>
-
                         </div>
-
                     </form>
                 </div>
             </div>

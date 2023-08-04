@@ -30,15 +30,16 @@ namespace backend.Middleware
                 var problemDetails = new ProblemDetails
                 {
                     Title = "An error occurred",
-                    Status = 500,
+                    Status = context.Response.StatusCode,
                     Detail = ex.Message,
                 };
 
                 string responseMessage = JsonSerializer.Serialize(problemDetails);
 
                 // Set the response content
+                var statusCode = context.Response.StatusCode;
                 context.Response.ContentType = "application/problem+json";
-                context.Response.StatusCode = 500;
+                context.Response.StatusCode = statusCode;
                 await context.Response.WriteAsync(responseMessage);
             }
         }

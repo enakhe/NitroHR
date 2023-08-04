@@ -11,7 +11,6 @@ namespace backend.Models
         public string PhoneNumber { get; set; }
         public string CompanyName { get; set; }
         public string CompanySize { get; set; }
-        public string Affiliate { get; set; }
         public string Message { get; set; }
         public DateTime DateCreated { get; set; }
     }

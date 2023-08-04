@@ -1,6 +1,8 @@
 import { Component, Fragment } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 export default class App extends Component {
 	static displayName = App.name;
@@ -15,6 +17,7 @@ export default class App extends Component {
 						})}
 					</Routes>
 				</BrowserRouter>
+				<ToastContainer />
 			</Fragment>
 		)
 	}

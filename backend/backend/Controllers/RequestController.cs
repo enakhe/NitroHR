@@ -24,7 +24,13 @@ namespace backend.Controllers
         {
             if (request == null)
             {
-                Response.StatusCode = 500;
+                Response.StatusCode = 400;
+                throw new Exception("Please provide all fields");
+            }
+
+            if (request.FirstName == null || request.FirstName == "" || request.LastName == null || request.LastName == "" || request.Email == null || request.Email == "" || request.PhoneNumber == null || request.PhoneNumber == "" || request.CompanyName == null || request.CompanyName == "" || request.CompanySize == null || request.CompanySize == "" || request.Message == null || request.Message == "")
+            {
+                Response.StatusCode = 400;
                 throw new Exception("Please provide all fields");
             }
 
