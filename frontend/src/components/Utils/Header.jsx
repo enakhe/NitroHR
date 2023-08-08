@@ -15,14 +15,23 @@ const Header = () => {
             <header className="absolute inset-x-0 top-0 z-50">
                 <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
-                        <a href="/" className="-m-1.5 p-1.5">
+                        <Link to="/" className="-m-1.5 p-1.5">
                             <span className="sr-only">Nitro HR</span>
                             <img
                                 className="h-10 w-auto"
                                 src={logo}
                                 alt="Nitro HR logo"/>
-                        </a>
+                        </Link>
                     </div>
+                    {/* <div className="flex lg:flex-1">
+                        <Link to="/" className="-m-1.5 p-1.5">
+                            <span className="sr-only">Nitro HR</span>
+                            <img
+                                className="h-7 w-auto"
+                                src={logo2}
+                                alt="Nitro HR logo" />
+                        </Link>
+                    </div> */}
                     <div className="flex lg:hidden">
                         <button
                             type="button"
@@ -43,6 +52,12 @@ const Header = () => {
                         <Link to='/request-demo'>
                             <button className="rounded-md hover:bg-primary-hover font-semibold text-white text-sm bg-primary px-3.5 py-2.5">
                                 Request a demo
+                            </button>
+                        </Link>
+
+                        <Link to='/login'>
+                            <button className="rounded-md mx-3 hover:bg-secondary font-semibold text-white text-sm bg-gray-900 px-3.5 py-2.5">
+                                Login
                             </button>
                         </Link>
                     </div>

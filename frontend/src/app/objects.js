@@ -1,4 +1,4 @@
-import { 
+import {
     IdentificationIcon,
     QueueListIcon,
     CurrencyDollarIcon,
@@ -12,8 +12,14 @@ import {
     QuestionMarkCircleIcon,
     DevicePhoneMobileIcon,
     HandThumbUpIcon,
-    BanknotesIcon
+    BanknotesIcon,
+
+    FolderArrowDownIcon,
+    BriefcaseIcon,
+    StarIcon
 } from '@heroicons/react/24/solid';
+
+import employee from '../assets/employee.png'
 
 export const sizes = [
     "less than 10",
@@ -28,7 +34,7 @@ export const sizes = [
 ]
 
 export const navigation = [
-    { 
+    {
         name: 'Product',
         items: [
             {
@@ -64,7 +70,7 @@ export const navigation = [
             },
         ]
     },
-    { 
+    {
         name: 'About',
         items: [
             {
@@ -79,7 +85,7 @@ export const navigation = [
             }
         ]
     },
-    { 
+    {
         name: 'Help',
         items: [
             {
@@ -109,7 +115,7 @@ export const navigation = [
             }
         ],
     },
-    { 
+    {
         name: 'Pricing',
         items: [
             {
@@ -122,7 +128,30 @@ export const navigation = [
                 path: '/prices',
                 icon: BanknotesIcon
             }
-        ] 
+        ]
     },
 
+]
+
+export const employeeDataManagement = [
+    {
+        title: "Employee Data Management",
+        icon: IdentificationIcon,
+        subTitle: "A centralized hub for data",
+        desc: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.",
+        image: employee,
+        item: [
+            {
+                name: 'Personal Information Management',
+                description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+                icon: FolderArrowDownIcon,
+            },
+
+            {
+                name: 'Job History Tracking',
+                description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+                icon: BriefcaseIcon,
+            },
+        ],
+    }
 ]

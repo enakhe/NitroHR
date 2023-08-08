@@ -10,14 +10,16 @@ export default class App extends Component {
 	render() {
 		return (
 			<Fragment>
-				<BrowserRouter>
-					<Routes>
-						{AppRoutes.map((route, index) => {
-							return <Route path={route.path} key={index} element={route.element} />;
-						})}
-					</Routes>
-				</BrowserRouter>
-				<ToastContainer />
+				<section className='dark:bg-gray-800 dark:border-gray-700'>
+					<BrowserRouter>
+						<Routes>
+							{AppRoutes.map((route, index) => {
+								return <Route path={route.path} key={index} element={route.element} />;
+							})}
+						</Routes>
+					</BrowserRouter>
+					<ToastContainer />
+				</section>
 			</Fragment>
 		)
 	}
