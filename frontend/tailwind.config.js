@@ -1,4 +1,7 @@
-module.exports = {
+/* eslint-disable no-undef */
+import withMT from "@material-tailwind/react/utils/withMT";
+
+export default withMT({
 	content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html", "./views/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
 	mode: "jit",
 	theme: {
@@ -9,10 +12,11 @@ module.exports = {
 			xl: '1440px',
 		},
 		colors: {
-			'primary': "#0bbf64",
+			'primary2': "#0bbf64",
 			'primary-hover': "#047E41",
 			'secondary': "#3F3D56",
 			'secondary-hover': "#1F1F29",
+			'tertiary': "#D7F5E6",
 			transparent: 'transparent',
 			black: '#000',
 			white: '#fff',
@@ -50,8 +54,8 @@ module.exports = {
 			'gray-light': '#d3dce6',
 		},
 		fontFamily: {
-			display: ["Open Sans", "sans-serif"],
-			body: ["Open Sans", "sans-serif"],
+			display: ["Poppins", "sans-serif"],
+			body: ["Poppins", "sans-serif"],
 		},
 		extend: {
 			pacing: {
@@ -84,5 +88,9 @@ module.exports = {
 	variants: {
 		extend: {},
 	},
-	plugins: [require("@tailwindcss/forms")],
-};
+	plugins: [
+		require("@tailwindcss/forms"),
+		require('tailwindcss-animated'),
+		require("tw-elements/dist/plugin.cjs")
+	],
+});

@@ -6,7 +6,7 @@ import { Fragment } from 'react'
 const Dropdown = ({name, list}) => {
     return (
         <Popover className="relative">
-            <Popover.Button className="inline-flex focus:border-none dark:text-white focus:outline-none items-center gap-x-1 text-md font-semibold leading-6 text-gray-900">
+            <Popover.Button className="inline-flex focus:border-none focus:outline-none items-center gap-x-1 text-md font-semibold leading-6 text-gray-900">
                 {name}
                 <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
             </Popover.Button>

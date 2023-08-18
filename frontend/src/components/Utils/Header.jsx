@@ -23,15 +23,6 @@ const Header = () => {
                                 alt="Nitro HR logo"/>
                         </Link>
                     </div>
-                    {/* <div className="flex lg:flex-1">
-                        <Link to="/" className="-m-1.5 p-1.5">
-                            <span className="sr-only">Nitro HR</span>
-                            <img
-                                className="h-7 w-auto"
-                                src={logo2}
-                                alt="Nitro HR logo" />
-                        </Link>
-                    </div> */}
                     <div className="flex lg:hidden">
                         <button
                             type="button"
@@ -50,13 +41,13 @@ const Header = () => {
                     </div>
                     <div className="hidden lg:flex lg:flex-1 lg:justify-end">
                         <Link to='/request-demo'>
-                            <button className="rounded-md hover:bg-primary-hover font-semibold text-white text-sm bg-primary px-3.5 py-2.5">
+                            <button className="rounded hover:bg-primary-hover font-semibold text-white text-sm bg-primary2 px-4 py-3.5">
                                 Request a demo
                             </button>
                         </Link>
 
                         <Link to='/login'>
-                            <button className="rounded-md mx-3 hover:bg-secondary font-semibold text-white text-sm bg-gray-900 px-3.5 py-2.5">
+                            <button className="rounded mx-3 hover:bg-secondary font-semibold text-white text-sm bg-gray-900 px-4 py-3.5">
                                 Login
                             </button>
                         </Link>
@@ -97,13 +88,14 @@ const Header = () => {
                                 </div>
                                 <div className="py-6">
                                     <Link to='/request-demo'>
-                                        <button className="rounded-md hover:bg-primary-hover font-semibold text-white text-sm bg-primary px-3.5 py-2.5">
+                                        <button className="rounded hover:bg-primary-hover font-semibold text-white text-sm bg-primary2 px-4 py-3.5">
                                             Request a demo
                                         </button>
                                     </Link>
-                                    <Link to='/sign-in'>
-                                        <button className="rounded-md hover:bg-primary-hover font-semibold text-white text-sm bg-secondary mx-4 px-3.5 py-2.5">
-                                            Sign In
+
+                                    <Link to='/login'>
+                                        <button className="rounded mx-3 hover:bg-secondary font-semibold text-white text-sm bg-gray-900 px-4 py-3.5">
+                                            Login
                                         </button>
                                     </Link>
 
