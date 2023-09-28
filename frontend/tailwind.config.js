@@ -91,6 +91,7 @@ export default withMT({
 	plugins: [
 		require("@tailwindcss/forms"),
 		require('tailwindcss-animated'),
-		require("tw-elements/dist/plugin.cjs")
+		require("tw-elements/dist/plugin.cjs"),
+		require('flowbite/plugin')
 	],
 });

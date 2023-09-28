@@ -27,7 +27,7 @@ const Form = () => {
     useEffect(() => {
         if (userInfo) {
             if (isSuccess) {
-                toast.success(`${userInfo.FirstName}, Successfully logged in.`);
+                toast.success(`Successfully logged in.`);
                 navigate('/dashboard');
             }
         }

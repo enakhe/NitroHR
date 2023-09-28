@@ -1,8 +1,8 @@
-import { Fragment } from "react";
-import Home from "../../components/Dashboard/Home";
+import { Fragment } from "react"
 import Navbar from "../../components/Dashboard/Navbar";
+import Home from "../../components/Employee/Home";
 
-const Dashboard = () => {
+const Employee = () => {
     return (
         <Fragment>
             <Navbar />
@@ -11,4 +11,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard;
+export default Employee

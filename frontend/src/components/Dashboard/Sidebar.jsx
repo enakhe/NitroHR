@@ -1,23 +1,176 @@
 import { Fragment } from "react"
+import {
+    Card,
+    Typography,
+    List,
+    ListItem,
+    ListItemPrefix,
+    ListItemSuffix,
+    Chip,
+    Accordion,
+    AccordionHeader,
+    AccordionBody,
+    Input,
+} from "@material-tailwind/react";
+import {
+    PresentationChartBarIcon,
+    UserCircleIcon,
+    Cog6ToothIcon,
+    InboxIcon,
+    PowerIcon,
+} from "@heroicons/react/24/solid";
+import {
+    ChevronRightIcon,
+    ChevronDownIcon,
+    MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import logo from '../../assets/logo.png'
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const employeeDropdown = [
+    {
+        name: "All Employee",
+        link: "/all-employee"
+    },
+
+    {
+        name: "Holiday",
+        link: "/holiday"
+    },
+
+    {
+        name: "Leaves (Admin)",
+        link: "/leave-admin"
+    },
+
+    {
+        name: "Leaves (Employee)",
+        link: "/leave-employee"
+    },
+
+    {
+        name: "Attendance",
+        link: "/attendance"
+    },
+]
 
 const Sidebar = () => {
+    const [open, setOpen] = useState(0);
+
+    const handleOpen = (value) => {
+        setOpen(open === value ? 0 : value);
+    };
+
     return (
         <Fragment>
-            <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0" aria-label="Sidebar">
-                <div className="h-full px-3 pb-4 overflow-y-auto bg-white">
-                    <ul className="space-y-2 font-medium">
-                        <li>
-                            <a href="#" className="flex items-center p-2 text-gray-600 rounded-lg hover:bg-gray-700 group">
-                                <svg className="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 21">
-                                    <path d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                                    <path d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
-                                </svg>
-                                <span className="ml-3">Dashboard</span>
-                            </a>
-                        </li>
-                    </ul>
+            
+            <Card className="h-full scroll-smooth overflow-auto top-0 left-0 z-40 h-screen overflow-hidden fixed rounded-none w-full max-w-[20rem] p-4 shadow-none">
+                <div className="mb-2 flex items-center gap-4 p-4">
+                    <Link to="/" className="-m-1.5 p-1.5">
+                        <span className="sr-only">Nitro HR</span>
+                        <img
+                            className="w-20"
+                            src={logo}
+                            alt="Nitro HR logo" />
+                    </Link>
                 </div>
-            </aside>
+                <div className="p-2">
+                    <Input className="focus:border-primary2 border-2 ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-primary2"  icon={<MagnifyingGlassIcon className="h-5 w-5" />} label="Search" />
+                </div>
+                <List>
+                    <Accordion
+                        open={open === 1}
+                        icon={
+                            <ChevronDownIcon
+                                strokeWidth={2.5}
+                                className={`mx-auto h-4 w-4 transition-transform ${open === 1 ? "rotate-180" : ""}`}
+                            />
+                        }
+                    >
+                        <Link to="/dashboard">
+                            <ListItem>
+                                <ListItemPrefix>
+                                    <PresentationChartBarIcon className="h-5 w-5" />
+                                </ListItemPrefix>
+                                Dashboard
+                            </ListItem>
+                        </Link>
+                    
+                        <AccordionBody className="py-1">
+                            <List className="p-0">
+                                
+                            </List>
+                        </AccordionBody>
+                    </Accordion>
+                    <Accordion
+                        open={open === 2}
+                        icon={
+                            <ChevronDownIcon
+                                strokeWidth={2.5}
+                                className={`mx-auto h-4 w-4 transition-transform ${open === 2 ? "rotate-180" : ""}`}
+                            />
+                        }
+                    >
+                        <ListItem className="p-0" selected={open === 2}>
+                            <AccordionHeader onClick={() => handleOpen(2)} className="border-b-0 p-3">
+                                <ListItemPrefix>
+                                    <FontAwesomeIcon icon={faUsers} className="h-5 w-5" />
+                                </ListItemPrefix>
+                                <Typography color="blue-gray" className="mr-auto font-normal font">
+                                    Employee
+                                </Typography>
+                            </AccordionHeader>
+                        </ListItem>
+                        <AccordionBody className="py-1">
+                            <List className="p-0">
+                                {
+                                    employeeDropdown.map((item, index) => (
+                                        <Link to={item.link} key={index}>
+                                            <ListItem>
+                                                <ListItemPrefix>
+                                                    <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                                                </ListItemPrefix>
+                                                {item.name}
+                                            </ListItem>
+                                        </Link>
+                                    ))
+                                }
+                            </List>
+                        </AccordionBody>
+                    </Accordion>
+                    <hr className="my-2 border-blue-gray-50" />
+                    <ListItem>
+                        <ListItemPrefix>
+                            <InboxIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Inbox
+                        <ListItemSuffix>
+                            <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
+                        </ListItemSuffix>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemPrefix>
+                            <UserCircleIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Profile
+                    </ListItem>
+                    <ListItem>
+                        <ListItemPrefix>
+                            <Cog6ToothIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Settings
+                    </ListItem>
+                    <ListItem>
+                        <ListItemPrefix>
+                            <PowerIcon className="h-5 w-5" />
+                        </ListItemPrefix>
+                        Log Out
+                    </ListItem>
+                </List>
+            </Card>
         </Fragment>
     )
 }
